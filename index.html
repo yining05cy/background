@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>圆影随行 - 图片交互美学</title>
+		<style>
+			
+			/* 重置默认样式，消除边距 */
+			* {
+			    margin: 0;
+			    padding: 0;
+			    box-sizing: border-box;
+			}
+			
+			body {
+			    /* 隐藏滚动条，避免动画过程中出现滚动 */
+			    overflow: hidden;
+			    background-color: #ffffff; /* 白色背景衬托图片动画 */
+			}
+			
+			
+			img {
+				/*宽度和浏览器一样宽*/
+				width: 100%;
+				/*高度自适应一下*/
+				height: 100vh;
+				/* object-fit: 对图片进行裁剪，保留原始比例;*/
+				object-fit: cover;
+				/* 动画： 动画名 执行时间 执行次数 infinite(无限执行次数)*/
+				animation: move 8s ease-in-out infinite alternate;   /* “ease-in-out infinite alternate” 与 infinite 可互相替换*/
+			}
+
+			/*关键帧动画 key：关键*/
+			@keyframes move {
+
+				/* 在百分之0的时候，就是第0秒的时候*/
+				0% {
+					/* 裁剪路径   clip-path: circle:  把图像裁剪为 n% 的圆;*/
+					/* 它的语法   clip-path: circle (圆的半径 at 圆心位置);*/
+					/* 注意这个位置 ： 50% 50% 就是网页正中间*/
+					clip-path: circle(80px at 50% 50%);
+					opacity: 0;
+					/* 初始透明 */
+				}
+
+				/* 在s的时候  5s的百分之20就是1秒*/
+				10% {
+					clip-path: circle(100px at 20% 50%);
+					opacity: 1;
+					/* 20%时渐显 */
+				}
+
+				30% {
+					clip-path: circle(170px at 55% 15%); /* 位置偏移更丰富（上下+左右） 刚好是人物头像的位置*/
+				}
+
+				/* 在s的时候  */
+				50% {
+					clip-path: circle(100px at 80% 50%);
+				}
+
+				/* 在s的时候 */
+				70% {
+					clip-path: circle(100px at 50% 85%);
+				}
+
+				/* 在4s的时候  又回到正中间*/
+				90% {
+					clip-path: circle(160px at 50% 50%);
+				}
+				
+				/* 在5s的时候  变成正常图片大小*/
+				100% {
+					clip-path: circle(100% at 50% 50%);
+					opacity: 1;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<img src="img/1.png" alt="背景图片" />
+	</body>
+</html>
